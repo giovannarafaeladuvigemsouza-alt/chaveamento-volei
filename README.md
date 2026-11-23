@@ -40,7 +40,7 @@ Oferecer uma ferramenta simples e confiável que marque os pontos, decida o venc
 - [x] Histórico de confrontos com filtro por equipe e campanha (vitórias/derrotas)
 - [x] Destaques: líder, melhor ataque e melhor defesa
 - [x] Regras configuráveis (melhor de 1, 3 ou 5 sets; set até 7, 11, 15 ou 21 pontos)
-- [x] Dados salvos no navegador (`localStorage`)
+- [x] Dados compartilhados entre dispositivos pelo Supabase
 - [x] Tema claro e escuro automático, layout responsivo para celular
 - [x] Botão "Carregar exemplo" para testes e demonstração
 
@@ -72,7 +72,7 @@ Oferecer uma ferramenta simples e confiável que marque os pontos, decida o venc
 | HTML5 | Estrutura das telas |
 | CSS3 (variáveis, grid, flexbox) | Visual, responsividade e tema claro/escuro |
 | JavaScript (puro) | Regras de negócio e interface |
-| `localStorage` | Guardar os dados sem banco de dados |
+| Supabase | Armazenar e compartilhar os dados do campeonato |
 | Git e GitHub | Versionamento e trabalho em equipe |
 | GitHub Pages | Publicação do sistema |
 
@@ -102,7 +102,14 @@ mesa-pro/
    ```
 2. Abra a pasta no **VS Code** e use a extensão **Live Server** (*Open with Live Server*), ou abra o `index.html` no navegador.
 
-Não precisa instalar nada nem ter internet (a fonte é opcional; há fontes de reserva).
+### Configurar o Supabase
+
+1. Crie um projeto no Supabase.
+2. No SQL Editor, execute `supabase/migrations/20261123000000_create_championship_state.sql`.
+3. Copie `supabase-config.js` e preencha `url` e `anonKey` com os valores de **Project Settings → API**.
+4. Sirva a pasta `mesa-pro/mesa-pro` com Live Server ou publique os arquivos em um host estático.
+
+A migration permite leitura e escrita pública porque o app não tem login. Use somente a chave pública `anon`/publishable no navegador; nunca publique a chave `service_role`. Qualquer pessoa com acesso ao site poderá alterar o campeonato.
 
 ## ✅ Como testar
 
