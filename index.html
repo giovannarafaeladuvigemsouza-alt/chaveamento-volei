@@ -13,6 +13,14 @@
 <h1>Mesa<span> Pro</span></h1>
 <p class="sub">Interclasse de vôlei de mesa · Colégio Sinerge</p>
 </header>
+<section id="api-panel" aria-label="Conexão com placar centralizado">
+ <label for="api-token">Token individual da API</label>
+ <input id="api-token" type="password" autocomplete="off" placeholder="Informe o token fornecido pelo professor">
+ <button class="btn pri" id="api-connect" type="button">Conectar</button>
+ <button class="btn" id="api-disconnect" type="button">Sair e limpar token</button>
+ <button class="btn warn" id="api-retry-create" type="button" hidden>Já conferi a lista: permitir nova tentativa</button>
+ <p id="api-status" role="status" aria-live="polite">Desconectado. O token não é salvo.</p>
+</section>
 <div id="prog"></div>
 <nav role="tablist">
 <button class="tab" role="tab" data-a="tab" data-v="partidas">Partidas</button>

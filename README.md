@@ -139,3 +139,25 @@ A migration permite leitura e escrita pública porque o app não tem login. Use 
 ## 🤖 Uso de IA
 
 Ferramentas de IA foram usadas como apoio no desenvolvimento, conforme permitido no enunciado. Todos os integrantes devem compreender e saber explicar o código.
+
+## API centralizada do Interclasse
+
+O app também sincroniza o placar de cada partida com `https://rvarjao.pythonanywhere.com/api`. O estado completo do campeonato continua no Supabase; o ID retornado pela API é guardado junto à partida nesse estado. Sets, histórico e regras de vôlei permanecem no Mesa Pro.
+
+1. Abra o sistema e informe no campo **Token individual da API** o token fornecido pelo professor. O token fica apenas na memória da página; não o coloque em `app.js`, `index.html`, `supabase-config.js` ou no GitHub.
+2. Selecione uma partida para iniciar. Na primeira sincronização, o app cria o placar com modalidade `volei` e salva o ID retornado. Ao abrir novamente essa partida, o mesmo ID é consultado e reutilizado.
+3. Pontuação e estados `aguardando`, `em_andamento` e `encerrado` são enviados por PATCH em sequência. Sets e demais informações específicas continuam no Mesa Pro.
+4. Use **Sair e limpar token** ao terminar. Fechar ou recarregar a página também remove o token da memória. O campo não usa armazenamento local ou de sessão.
+
+Se a conexão cair durante a criação, o app bloqueia uma repetição automática porque o servidor pode já ter criado o placar. Confira primeiro a lista de placares no monitor da API; só então use o botão de nova tentativa. A listagem é compartilhada, então confirme os nomes do seu jogo antes de liberar a tentativa.
+
+O indicador mostra conexão, andamento, erros HTTP (incluindo 400, 401, 403, 404 e 503) e a hora da última resposta confirmada. Uma consulta GET ocorre a cada 15 segundos enquanto um placar vinculado está aberto. Falhas da API não apagam dados locais.
+
+### Verificação com o professor
+
+- Use somente o token do seu grupo e uma partida de teste com nomes que identifiquem o grupo.
+- Confirme no DevTools que a criação retorna HTTP 201, OPTIONS retorna 204 e consulta/atualização retorna HTTP 200. Não tente definir `Origin` manualmente e não use `no-cors`.
+- Consulte o mesmo ID, inicie, altere os pontos, encerre e recarregue a página. O ID deve continuar igual. Confira o monitor público, se o grupo estiver visível.
+- Confirme que token inválido e falhas de rede exibem erro e que tentativa em placar de outro grupo responde 403 sem alterá-lo.
+
+**Limitação:** a API guarda somente pontos, status e tempo total; ela não guarda o log de pontos nem os sets. A restauração dos detalhes depende do estado salvo no Supabase. O Mesa Pro não possui relógio de partida e, por isso, não envia `tempo_partida`.

@@ -6,6 +6,8 @@ html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 "Bricolage Grotesque","Trebuchet MS",system-ui,sans-serif;font-variant-numeric:tabular-nums}
 .wrap{max-width:980px;margin:0 auto;padding:20px 16px 48px}
 header{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:baseline;justify-content:space-between}
+#api-panel{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:12px;margin:12px 0;background:var(--sf);border:1px solid var(--line);border-radius:10px}
+#api-panel label{font-weight:600}#api-panel input{flex:1 1 230px}#api-status{flex-basis:100%;margin:0;color:var(--mute);font-size:14px}#api-status.err{color:#B3261E}
 h1{margin:0;font-size:clamp(34px,7vw,56px);line-height:1;font-weight:800;letter-spacing:-.03em}
 h1 span{color:var(--ball)}
 .sub{color:var(--mute);margin:0}
